@@ -10,7 +10,7 @@ class GridWidgetItem extends StatelessWidget {
     return GridTile(child: Stack(children:[
       GestureDetector(
         onTap: (){
-          Navigator.of(context).pushNamed(DetailPage.routeName,arguments: landLordInfo.id);
+          Navigator.of(context).pushNamed(DetailPage.routeName,arguments: landLordInfo.houseId);
         },
           child: Image.network(landLordInfo.imageUrl,fit: BoxFit.cover,)),
     IconButton(icon: Icon(landLordInfo.isFavorite?Icons.favorite:Icons.favorite_border,color: Colors.purpleAccent,), onPressed: (){
