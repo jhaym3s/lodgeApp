@@ -6,7 +6,7 @@ import '../provider/info_class.dart';
 class GridWidgetItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final landLordInfo = Provider.of<LandLordInfo>(context);
+    final landLordInfo = Provider.of<HouseInfo>(context);
     return GridTile(child: Stack(children:[
       GestureDetector(
         onTap: (){

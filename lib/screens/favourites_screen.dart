@@ -3,12 +3,12 @@ import 'package:provider/provider.dart';
 import '../provider/info_provider.dart';
 import 'grid_widget.dart';
 
-class Favourites extends StatefulWidget {
+class FavouritesScreen extends StatefulWidget {
   @override
-  _FavouritesState createState() => _FavouritesState();
+  _FavouritesScreenState createState() => _FavouritesScreenState();
 }
 
-class _FavouritesState extends State<Favourites> {
+class _FavouritesScreenState extends State<FavouritesScreen> {
   @override
   Widget build(BuildContext context) {
     final allProducts = Provider.of<InfoProvider>(context).favouritesOnly;
