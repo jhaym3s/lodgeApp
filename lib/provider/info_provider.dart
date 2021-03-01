@@ -27,21 +27,14 @@ class InfoProvider with ChangeNotifier{
         estateName:"name of the estate",
         landLordName: "Landlord 3"),
   ];
-
-
-  List<HouseInfo> get houseInfo{
+   List<HouseInfo> get houseInfo{
     return _houseInfo;
   }
-
   HouseInfo findById(String houseId){
     return _houseInfo.firstWhere((element) => element.houseId == houseId);
   }
-
    List<HouseInfo> get favouritesOnly{
-
    return _houseInfo.where((element) => element.isFavorite).toList();
-
   }
-
 
   }
