@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lodge/screens/auth_screen.dart';
 import 'package:lodge/screens/login_screen.dart';
-enum AuthMode  {signUp,login}
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -41,7 +41,7 @@ class _WelcomePageState extends State<WelcomePage> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
-                  color: Colors.black26,
+                  color: Colors.black12,
                   child: Column(
                     //crossAxisAlignment: CrossAxisAlignment.end,
                    // mainAxisAlignment: MainAxisAlignment.end,
@@ -63,7 +63,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       SizedBox(height: 50,),
                       RaisedButton(
                         onPressed: (){
-                      Navigator.of(context).popAndPushNamed(LoginScreen.routeName);
+                      Navigator.of(context).popAndPushNamed(AuthenticationScreen.routeName);
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './screens/auth_screen.dart';
 import 'package:lodge/screens/login_screen.dart';
 import './screens/welcome_page.dart';
 import 'package:lodge/screens/detail_page.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
-          //primarySwatch: Colors.purple,
+          primarySwatch: Colors.grey,
           // This makes the visual density adapt to the platform that you run
           // the app on. For desktop platforms, the controls will be smaller and
           // closer together (more dense) than on mobile platforms.
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         home: WelcomePage(),
         routes: {
 DetailPage.routeName :(context)=> DetailPage(),
-LoginScreen.routeName :(context)=> LoginScreen(),
+AuthenticationScreen.routeName :(context)=> AuthenticationScreen(),
         },
       ),
     );
