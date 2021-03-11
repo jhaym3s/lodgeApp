@@ -4,6 +4,7 @@ import '../screens/favourites_screen.dart';
 import '../screens/main_display_screen.dart';
 
 class CustomNavigationBar extends StatefulWidget {
+  static const routeName = "/bottomNavigation";
   @override
   _CustomNavigationBarState createState() => _CustomNavigationBarState();
 }

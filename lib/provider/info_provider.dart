@@ -34,7 +34,7 @@ class InfoProvider with ChangeNotifier{
     return _houseInfo.firstWhere((element) => element.houseId == houseId);
   }
    List<HouseInfo> get favouritesOnly{
-   return _houseInfo.where((element) => element.isFavorite).toList();
+   return _houseInfo.where((element) => element.isFavorite == true).toList();
   }
 
   }

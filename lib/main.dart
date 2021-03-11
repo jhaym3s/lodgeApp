@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import './screens/auth_screen.dart';
-import 'package:lodge/screens/login_screen.dart';
 import './screens/welcome_page.dart';
 import 'package:lodge/screens/detail_page.dart';
 import 'package:lodge/widgets/bottomNavigationBar.dart';
 import './provider/info_provider.dart';
-import './screens/login_screen.dart';
 import 'package:provider/provider.dart';
 import './provider/info_class.dart';
 import './screens/detail_page.dart';
@@ -37,6 +35,7 @@ class MyApp extends StatelessWidget {
         routes: {
 DetailPage.routeName :(context)=> DetailPage(),
 AuthenticationScreen.routeName :(context)=> AuthenticationScreen(),
+          CustomNavigationBar.routeName :(context)=> CustomNavigationBar(),
         },
       ),
     );

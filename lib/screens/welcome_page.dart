@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lodge/screens/auth_screen.dart';
-import 'package:lodge/screens/login_screen.dart';
 
 class WelcomePage extends StatefulWidget {
   @override

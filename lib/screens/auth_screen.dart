@@ -1,22 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:lodge/widgets/bottomNavigationBar.dart';
 
 
 enum AuthMode {Login,SignUp}
 class AuthenticationScreen extends StatefulWidget {
-  static const routeName = "authScreen";
+  static const routeName = "/authScreen";
   @override
   _AuthenticationScreenState createState() => _AuthenticationScreenState();
 }
 
 class _AuthenticationScreenState extends State<AuthenticationScreen> {
-  Widget inputForm({String hintText,bool showSuffixIcon,bool showLeadingIcon,String labelText, bool obscureText}){
+  Widget inputForm({String hintText,bool showSuffixIcon,String labelText, bool obscureText, Map authData, String authDataString, bool isEmail,TextEditingController controller}){
     return Container(
       decoration: BoxDecoration(
         color: Colors.white24,
         borderRadius:  BorderRadius.circular(22),
       ),
       child: TextFormField(
+        controller: controller,
+        onSaved: (newValue) {
+          authData[authDataString] = newValue;
+        },
         obscureText: obscureText,
+        validator: (value) {
+          if(value.isEmpty){
+            return "Please add a $labelText";
+          }
+          if(value.length <= 5 ){
+            return obscureText?"Password is too short":null;
+          }
+          if(!value.contains("@")|| value.endsWith(".com")){
+            return isEmail? "Please use a valid email":null;
+          }
+          return null;
+        },
         style: TextStyle(color: Colors.white,fontSize: 18,),
         cursorHeight: 18,
         cursorColor: Colors.white,
@@ -24,7 +41,6 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
           hintStyle: TextStyle(fontSize: 17, color: Colors.white),
           hintText: hintText,
           labelText: labelText,
-          icon: showLeadingIcon?Icon(Icons.email):null,
           suffixIcon: showSuffixIcon?IconButton(icon: Icon(Icons.remove_red_eye_outlined), onPressed: (){}):null,
           border: InputBorder.none,
           contentPadding: EdgeInsets.all(20),
@@ -34,6 +50,11 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
   }
   GlobalKey<FormState> _formKey = GlobalKey();
   AuthMode _authMode = AuthMode.Login;
+   Map<String, String> _authData ={
+     "email": "",
+     "password": "",
+   };
+   TextEditingController _passwordController = TextEditingController();
 
   void _switchMode(){
     if(_authMode == AuthMode.Login){
@@ -55,8 +76,11 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
         child: Form(
             key: _formKey,
             child:
-            Container(
+            AnimatedContainer(
+
               height:deviceSize.height,
+              duration: Duration(milliseconds: 200),
+              curve: Curves.bounceIn,
               child: Padding(
                 padding: const EdgeInsets.only(left: 8,right: 8,top: 8),
                 child: Column(
@@ -77,13 +101,16 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                     ),
                     Column(
                       children: [
-                        _authMode == AuthMode.SignUp? inputForm(hintText: "Enter Full name",showLeadingIcon: false,showSuffixIcon: false, labelText:                          "Name", obscureText: true):SizedBox(),
+                       _authMode == AuthMode.SignUp? inputForm(hintText: "Enter Full name",showSuffixIcon: false, labelText:                               "Name", obscureText: false):SizedBox(),
                         _authMode == AuthMode.SignUp?SizedBox(height: 20,):SizedBox(),
-                        inputForm(hintText: "coolname@gmail.com",showLeadingIcon: false,showSuffixIcon: false, labelText: "Email", obscureText: false),
+                        inputForm(hintText: "coolname@gmail.com",showSuffixIcon: false,
+                            labelText: "Email", obscureText: false,authDataString: _authData["email"]),
                         SizedBox(height: 20,),
-                        inputForm(hintText: null,showLeadingIcon: false,showSuffixIcon: true, labelText: "Password", obscureText: true),
+                        //this is the password field
+                        inputForm(hintText: null,showSuffixIcon: true, labelText: "Password",
+                            obscureText: true,authDataString: _authData["password"]),
                         _authMode == AuthMode.SignUp?SizedBox(height: 20,):SizedBox(),
-                        _authMode == AuthMode.SignUp? inputForm(hintText: null,showLeadingIcon: false,showSuffixIcon: true, labelText: "Confirm Password", obscureText: true):SizedBox(),
+                        _authMode == AuthMode.SignUp? inputForm(hintText: null,showSuffixIcon: true, labelText: "Confirm Password", obscureText: true):SizedBox(),
                         _authMode == AuthMode.Login? Align(
                           alignment: Alignment.topRight,
                           child: FlatButton(
@@ -98,7 +125,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                       children: [
                         RaisedButton(
                             onPressed: (){
-                              // Navigator.of(context).popAndPushNamed(LoginScreen.routeName);
+                              Navigator.of(context).popAndPushNamed(CustomNavigationBar.routeName);
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
